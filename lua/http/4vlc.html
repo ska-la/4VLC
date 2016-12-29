@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<title>4VLC</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, scale=1">
+
+<link rel="stylesheet" href="lib/w3.css">
+<link rel="stylesheet" href="lib/w3-theme-orange.css">
+
+<script src="lib/w3data.js"></script>
+<script src="js/java_vars.js"></script>
+
+<body>
+
+  <div class="w3-row w3-padding-0">
+    <div class="w3-col l3 w3-text-white w3-tiny"><p>Hidden Text</p></div>
+    <div class="w3-col l6 w3-center">
+      <div id="idSec" class="w3-container w3-padding-0" style="display:none">
+        <table id="idTbl" class="w3-table w3-striped w3-bordered w3-xlarge">
+          <tr w3-repeat="element">
+            <td width="10%">{{icon_type}}</td>
+            <th width="90%" onclick="{{click_type}}">{{name}}</th>
+          </tr>
+        </table>
+        <br>
+        <div class="w3-btn w3-blue w3-text-white w3-xlarge w3-round-jumbo" onclick="closeFList()" style="width:60%">EXIT</div>
+      </div>
+      <div id="idMain" class="w3-container w3-padding-0">
+        <div class="w3-orange w3-text-white w3-xxlarge">Welcome to mCast with VLM</div><br>
+        <div class="w3-container w3-section">
+          <div class="w3-btn w3-blue w3-text-white w3-xlarge w3-section w3-round-jumbo" onclick='openFList("","dir")' style="width:70%">Select File</div><br>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 w3-center w3-text-orange w3-small">
+      <p>Powered by <a href="http://www.w3schools.com/w3css/" target="_blank">W3.CSS</a></p>
+    </div>
+  </div>
+
+
+<script src="js/java_stuff.js" defer="true"></script>
+
+</body>
+</html>
