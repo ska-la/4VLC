@@ -25,7 +25,7 @@
 3. Connect to VLC's web interface. Open your favorite web browser and input http://localhost:8080/ or http://\<your desired ip address\>:8080/ into address bar. Also you can add path ..:8080/mobile.html . Play with it. May be that's all of you need.
 4. Now input http://\<your ip addr\>:8080/4vlc.html and compare with our solution. You can receive the created streams with any player which support a playback of a multicast stream. You can start another instance of VLC and use View -> Playlist -> Network streams(SAP). Choose desired stream and Play it.
 
-# How Setup a stream
+# How setup a Stream
 After you clicked on blue button "Select File" you can wander through your file system. Choose **ONLY MP4** file. Provide unique name for a stream when you ask. It's needed to distinguish each stream from others.
 
 ---
