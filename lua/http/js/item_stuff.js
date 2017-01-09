@@ -182,13 +182,15 @@ var tmpTime = "";
   } else {
     tmpTime = ":" + (tmpNum2).toFixed(0);
   }
-  tmpNum2 = (tmpNum%3600 - tmpNum2)/60;
+  tmpNum -= tmpNum2;
+  tmpNum2 = (tmpNum%3600)/60;
   if ( tmpNum2 < 10 ) {
     tmpTime = ":0" + (tmpNum2).toFixed(0) + tmpTime;
   } else {
     tmpTime = ":" + (tmpNum2).toFixed(0) + tmpTime;
   }
-  tmpNum2 = tmpNum/3600;
+  tmpNum -= tmpNum2*60;
+  tmpNum2 = (tmpNum%86400)/3600;
   if ( tmpNum2 < 10 ) {
     tmpTime = "0" + (tmpNum2).toFixed(0) + tmpTime;
   } else {
@@ -215,13 +217,15 @@ var tmpTime = "";
   } else {
     tmpTime = ":" + (tmpNum2).toFixed(0);
   }
-  tmpNum2 = (tmpNum%3600 - tmpNum2)/60;
+  tmpNum -= tmpNum2;
+  tmpNum2 = (tmpNum%3600)/60;
   if ( tmpNum2 < 10 ) {
     tmpTime = ":0" + (tmpNum2).toFixed(0) + tmpTime;
   } else {
     tmpTime = ":" + (tmpNum2).toFixed(0) + tmpTime;
   }
-  tmpNum2 = tmpNum/3600;
+  tmpNum -= tmpNum2*60;
+  tmpNum2 = (tmpNum%86400)/3600;
   if ( tmpNum2 < 10 ) {
     tmpTime = "0" + (tmpNum2).toFixed(0) + tmpTime;
   } else {
