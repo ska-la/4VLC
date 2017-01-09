@@ -90,7 +90,9 @@ var tmpName = window.prompt("Please, input name for VLM.\nIt must be distinguish
   }
   strmName = tmpName + " ";
 
-var tmpCmd = vlmCmd + encodeURIComponent(cmdNew + strmName + strmMode + strmEn + strmLoop + strmIn + filePath + strmOut + fileName + strmOutEnd);
+  addrLastByte++;
+var tmpByte = addrLastByte.toString();
+var tmpCmd = vlmCmd + encodeURIComponent(cmdNew + strmName + strmMode + strmEn + strmLoop + strmIn + filePath + strmOut1 + mcastIp + tmpByte + strmOut2 + mcastPort + strmOut3 + fileName + strmOutEnd);
 
   w3Http( tmpCmd , function () {
       if ( this.readyState == 4 && this.status == 200 ) {

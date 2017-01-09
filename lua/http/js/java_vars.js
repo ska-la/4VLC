@@ -14,7 +14,12 @@ var strmMode = "broadcast ";
 var strmEn = "enabled ";
 var strmLoop = "loop ";
 var strmIn = 'input "';
-var strmOut = '" output #rtp{mux=ts,dst=224.2.0.1,port=1234,sdp=sap,name="';
+var strmOut1 = '" output #rtp{mux=ts,dst=';
+var mcastIp = '224.2.0.';
+var addrLastByte = 1;
+var strmOut2 = ',port=';
+var mcastPort = '1234';
+var strmOut3 = ',sdp=sap,name="';
 var strmOutEnd = '"}';
 
 var extA = ["mp3", "ogg", "flac", "wma", "wav"];
