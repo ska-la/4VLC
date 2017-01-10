@@ -33,13 +33,21 @@ function fillPage() {
 var tmpName = "";
 
   brIndex = getTagIndex( xmlDoc, "broadcast" );
-  var tagAttrs = xmlDoc.getElementsByTagName("broadcast")[brIndex].attributes;
+  brXmlPart = xmlDoc.getElementsByTagName("broadcast")[brIndex];
+  var tagAttrs = brXmlPart.attributes;
   tmpName = tagAttrs.getNamedItem("name").nodeValue;
   document.getElementById("nameInfo").innerHTML = tmpName;
   document.getElementById("nameInfo2").innerHTML = tmpName;
   document.getElementById("loopInfo").innerHTML = tagAttrs.getNamedItem("loop").nodeValue;
-  document.getElementById("inputInfo").innerHTML = xmlDoc.getElementsByTagName("input")[brIndex].childNodes[0].nodeValue;
-  document.getElementById("outputInfo").innerHTML = xmlDoc.getElementsByTagName("output")[brIndex].childNodes[0].nodeValue;
+  var inputsArr = brXmlPart.getElementsByTagName("input");
+  var tmpStr = "";
+  var arrLen = inputsArr.length;
+  var j;
+    for ( j=0; j < arrLen; j++ ) {
+      tmpStr += inputsArr[j].childNodes[0].nodeValue + "<br>";
+    }
+  document.getElementById("inputInfo").innerHTML = tmpStr;
+  document.getElementById("outputInfo").innerHTML = brXmlPart.getElementsByTagName("output")[0].childNodes[0].nodeValue;
 
 }
 
@@ -67,7 +75,7 @@ var tmpCmd = vlmCmd + cmdDel + document.title;
           window.close();
         } else {
           xmlDoc = this.responseXML;
-          window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
+          vlcError();
         }
       } else  if ( this.readyState == 4 && this.status != 200 ) {
         vlcFail( this );
@@ -79,7 +87,7 @@ var tmpCmd = vlmCmd + cmdDel + document.title;
 
 function playItem() {
 
-var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlPlay;
+var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlPlay + currFileIndex.toString();
 
   w3Http( tmpCmd, function () {
       if ( this.readyState == 4 && this.status == 200 ) {
@@ -89,7 +97,7 @@ var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlPlay;
           pollVlm = setInterval( vlmStatReq, 3141 );
         } else {
           xmlDoc = this.responseXML;
-          window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
+          vlcError();
         }
       } else  if ( this.readyState == 4 && this.status != 200 ) {
         vlcFail( this );
@@ -112,7 +120,7 @@ var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlStop;
           knownLength = false;
         } else {
           xmlDoc = this.responseXML;
-          window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
+          vlcError();
         }
       } else  if ( this.readyState == 4 && this.status != 200 ) {
         vlcFail( this );
@@ -130,7 +138,7 @@ var btnPause = document.getElementById("idPause");
   if ( btnPause.innerHTML === pauseDecor ) {
     tmpCmd = tmpCmd + ctrlPause;
   } else {
-    tmpCmd = tmpCmd + ctrlPlay;
+    tmpCmd = tmpCmd + ctrlPlay + currFileIndex.toString();
   }
 
   w3Http( tmpCmd, function () {
@@ -145,7 +153,7 @@ var btnPause = document.getElementById("idPause");
           }
         } else {
           xmlDoc = this.responseXML;
-          window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
+          vlcError();
         }
       } else  if ( this.readyState == 4 && this.status != 200 ) {
         vlcFail( this );
@@ -161,6 +169,7 @@ function vlmStatReq() {
       if ( this.readyState == 4 && this.status == 200 ) {
         xmlDoc = this.responseXML;
         brIndex = getTagIndex( xmlDoc, "broadcast" );
+        brXmlPart = xmlDoc.getElementsByTagName("broadcast")[brIndex];
         dynDecor();
       } else  if ( this.readyState == 4 && this.status != 200 ) {
         vlcFail( this );
@@ -205,7 +214,12 @@ function dynDecor() {
 var tmpAttrs, tmpNum, tmpNum2;
 var tmpTime = "";
 
-  tmpAttrs = xmlDoc.getElementsByTagName("broadcast")[brIndex].getElementsByTagName("instance")[0].attributes;
+  tmpAttrs = brXmlPart.getElementsByTagName("instance")[0].attributes;
+  tmpNum = tmpAttrs.getNamedItem("playlistindex").nodeValue;
+  if ( currFileIndex != tmpNum ) {
+    currFileIndex = tmpNum;
+    knownLength = false;
+  }
   if ( ! knownLength ) {
     getTrackLen( tmpAttrs );
     knownLength = true;
@@ -235,6 +249,10 @@ var tmpTime = "";
   tmpNum = Number(tmpAttrs.getNamedItem("position").nodeValue.slice(2,4));
   document.getElementById("idProgress").style.width = tmpNum + "%";
 
+}
+
+function vlcError() {
+  window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
 }
 
 function vlcFail( abc ) {

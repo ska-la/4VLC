@@ -101,6 +101,7 @@ var tmpCmd = vlmCmd + encodeURIComponent(cmdNew + strmName + strmMode + strmEn +
         } else {
           xmlDoc = this.responseXML;
           window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
+          addrLastByte--;
         }
       } else  if ( this.readyState == 4 && this.status != 200 ) {
         vlcFail( this );
