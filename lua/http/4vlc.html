@@ -33,6 +33,17 @@
           <div class="w3-btn w3-blue w3-text-white w3-xlarge w3-section w3-round-jumbo" onclick='openFList("","dir")' style="width:70%">Select File</div><br>
         </div>
       </div>
+      <div id="idModal" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content w3-card-8">
+          <div class="w3-container">
+            <p><h2>Task already exist.<br>Add selected file there?</h2></p>
+            <div class="w3-btn-group w3-xlarge w3-section">
+              <button class="w3-btn w3-red w3-wide" onclick="selectNo()" style="width:50%"><b>No</b></button>
+              <button class="w3-btn w3-blue w3-wide" onclick="selectYes()" style="width:50%"><b>Yes</b></button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="w3-col l3 w3-center w3-text-orange w3-small">
       <p>Powered by <a href="http://www.w3schools.com/w3css/" target="_blank">W3.CSS</a></p>

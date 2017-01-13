@@ -9,6 +9,7 @@ var prefLen = 8;
 //var vlmStatus = "/requests/vlm.xml";
 var vlmCmd = "/requests/vlm_cmd.xml?command=";
 var cmdNew = "new ";
+var cmdSetup = "setup ";
 var strmName = "";
 var strmMode = "broadcast ";
 var strmEn = "enabled ";
@@ -27,4 +28,6 @@ var extV = ["mp4", "mpeg", "mpg", "avi", "mkv", "ogv", "wmv", "webm"];
 
 var jsonObj;
 var xmlDoc;
+var errMsg = "";
+var fPath = "";
 

@@ -83,7 +83,7 @@ var tmpIndex = newDir.lastIndexOf("/");
 
 function tryStream( filePath, fileName ) {
 
-var tmpName = window.prompt("Please, input name for VLM.\nIt must be distinguished from others\nalready exists.", "Test");
+var tmpName = window.prompt("Please, input Task name for VLM.\nIt must be distinguished from others\nalready exists.", "Test");
 
   if ( tmpName == null || tmpName == "" ) {
     return;
@@ -100,14 +100,45 @@ var tmpCmd = vlmCmd + encodeURIComponent(cmdNew + strmName + strmMode + strmEn +
           window.open( "item.html?name=" + tmpName );
         } else {
           xmlDoc = this.responseXML;
-          window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
-          addrLastByte--;
+          errMsg = xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue;
+          if ( errMsg.slice(-19) === "Name already in use" ) {
+            fPath = filePath;
+            document.getElementById("idModal").style.display="block";
+          } else {
+            window.alert( errMsg );
+          }
         }
       } else  if ( this.readyState == 4 && this.status != 200 ) {
         vlcFail( this );
       }
     }
   );
+}
+
+function selectYes() {
+
+var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + strmName + strmIn + fPath + '"');
+
+  w3Http( tmpCmd , function () {
+      if ( this.readyState == 4 && this.status == 200 ) {
+        if ( this.responseText.length != 84 ) {
+          xmlDoc = this.responseXML;
+          window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
+        }
+      } else  if ( this.readyState == 4 && this.status != 200 ) {
+        vlcFail( this );
+      }
+    }
+  );
+  document.getElementById("idModal").style.display="none";
+
+}
+
+function selectNo() {
+
+  document.getElementById("idModal").style.display="none";
+  addrLastByte--;
+
 }
 
 function closeFList() {
@@ -118,6 +149,8 @@ function closeFList() {
 }
 
 function vlcFail( abc ) {
+
   window.alert("VLC can't do it!\nStatus: " + abc.status + " " + abc.statusText);
+
 }
 
