@@ -36,9 +36,18 @@ var tmpName = "";
   brXmlPart = xmlDoc.getElementsByTagName("broadcast")[brIndex];
   var tagAttrs = brXmlPart.attributes;
   tmpName = tagAttrs.getNamedItem("name").nodeValue;
-  document.getElementById("nameInfo").innerHTML = tmpName;
-  document.getElementById("nameInfo2").innerHTML = tmpName;
-  document.getElementById("loopInfo").innerHTML = tagAttrs.getNamedItem("loop").nodeValue;
+  document.getElementById("nameInfo").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
+  document.getElementById("nameInfo2").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
+  if ( tagAttrs.getNamedItem("loop").nodeValue === "yes" ) {
+    loopEd = true;
+  } else {
+    loopEd = false;
+  }
+  if ( loopEd ) {
+    document.getElementById("idCheck").innerHTML = squareImg + checkImg;
+  } else {
+    document.getElementById("idCheck").innerHTML = squareImg;
+  }
   var inputsArr = brXmlPart.getElementsByTagName("input");
   var tmpStr = "";
   var arrLen = inputsArr.length;
@@ -248,6 +257,36 @@ var tmpTime = "";
   document.getElementById("timeElapsed").innerHTML = tmpTime;
   tmpNum = Number(tmpAttrs.getNamedItem("position").nodeValue.slice(2,4));
   document.getElementById("idProgress").style.width = tmpNum + "%";
+
+}
+
+function changeLoop() {
+
+var tmpLoop = "";
+
+  if ( loopEd ) {
+    document.getElementById("idCheck").innerHTML = squareImg;
+    tmpLoop = " unloop";
+    loopEd = false;
+  } else {
+    document.getElementById("idCheck").innerHTML = squareImg + checkImg;
+    tmpLoop = " loop";
+    loopEd = true;
+  }
+
+var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + document.title + tmpLoop);
+
+  w3Http( tmpCmd , function () {
+      if ( this.readyState == 4 && this.status == 200 ) {
+        if ( this.responseText.length != 84 ) {
+          xmlDoc = this.responseXML;
+          vlcError();
+        }
+      } else  if ( this.readyState == 4 && this.status != 200 ) {
+        vlcFail( this );
+      }
+    }
+  );
 
 }
 
