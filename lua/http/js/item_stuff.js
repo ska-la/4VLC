@@ -123,10 +123,7 @@ var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlStop;
   w3Http( tmpCmd, function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         if ( this.responseText.length == 84 ) {
-          document.getElementById("idPlay").style.display = "none";
-          document.getElementById("idStop").style.display = "block";
-          clearInterval( pollVlm );
-          knownLength = false;
+          stopThen();
         } else {
           xmlDoc = this.responseXML;
           vlcError();
@@ -223,6 +220,9 @@ function dynDecor() {
 var tmpAttrs, tmpNum, tmpNum2;
 var tmpTime = "";
 
+  if ( brXmlPart.getElementsByTagName("instance")[0] == undefined ) {
+    stopThen();
+  }
   tmpAttrs = brXmlPart.getElementsByTagName("instance")[0].attributes;
   tmpNum = tmpAttrs.getNamedItem("playlistindex").nodeValue;
   if ( currFileIndex != tmpNum ) {
@@ -260,6 +260,34 @@ var tmpTime = "";
 
 }
 
+function editSap() {
+
+var tmpCmd = "";
+
+  var tmpStr = brXmlPart.getElementsByTagName("output")[0].childNodes[0].nodeValue;
+  var firstQuote = tmpStr.indexOf("\"");
+  var secondQuote = tmpStr.lastIndexOf("\"");
+  var tmpSapName = tmpStr.slice( firstQuote + 1, secondQuote );
+
+  var newName = window.prompt("Input another name to distinguish your stream\ninto a list of Service Advertising Protocol(SAP).", tmpSapName);
+  if ( newName != null && newName !== tmpSapName ) {
+    tmpStr = tmpStr.replace(tmpSapName,newName);
+    tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + document.title + " output " + tmpStr);
+  w3Http( tmpCmd , function () {
+      if ( this.readyState == 4 && this.status == 200 ) {
+        if ( this.responseText.length != 84 ) {
+          xmlDoc = this.responseXML;
+          vlcError();
+        }
+      } else  if ( this.readyState == 4 && this.status != 200 ) {
+        vlcFail( this );
+      }
+    }
+  );
+  }
+
+}
+
 function changeLoop() {
 
 var tmpLoop = "";
@@ -274,7 +302,7 @@ var tmpLoop = "";
     loopEd = true;
   }
 
-var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + document.title + tmpLoop);
+  var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + document.title + tmpLoop);
 
   w3Http( tmpCmd , function () {
       if ( this.readyState == 4 && this.status == 200 ) {
@@ -288,6 +316,13 @@ var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + document.title + tmpLoop);
     }
   );
 
+}
+
+function stopThen() {
+  document.getElementById("idPlay").style.display = "none";
+  document.getElementById("idStop").style.display = "block";
+  clearInterval( pollVlm );
+  knownLength = false;
 }
 
 function vlcError() {
