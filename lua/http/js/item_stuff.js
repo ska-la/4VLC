@@ -319,10 +319,11 @@ var tmpLoop = "";
 }
 
 function stopThen() {
-  document.getElementById("idPlay").style.display = "none";
-  document.getElementById("idStop").style.display = "block";
   clearInterval( pollVlm );
   knownLength = false;
+  document.getElementById("idPlay").style.display = "none";
+  document.getElementById("idStop").style.display = "block";
+  document.getElementById("idPause").innerHTML = pauseDecor;
 }
 
 function vlcError() {
