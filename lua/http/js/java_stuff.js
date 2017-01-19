@@ -62,7 +62,7 @@ var tmpIndex = newDir.lastIndexOf("/");
             for ( j in extV ) {
               if ( extV[j] === tmpExt ) {
                 jsonObj["element"][i].icon_type = '<img src="images/Video-48.png" alt="File">';
-                if ( j >= 0 && j <= 2 ) {
+                if ( j >= 0 && j <= 3 ) {
                   tmpPath = jsonObj["element"][i].path.replace( /\\/g, "\\\\" );
                   jsonObj["element"][i].click_type = "tryStream('" + tmpPath + "','" + jsonObj["element"][i].name + "')";
                 } else {
