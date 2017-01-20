@@ -2,13 +2,13 @@
 1. It's not yet another player based on VLC at all.
 2. It's only yet another Remote Control for VLM (not Telnet interface).
 3. It's a set of additional files which are placed side-by-side with common VLC http files (into ../lua/http folder).
-4. Default: it's to setup a multicast streams of MP4 files and operate them (play, pause, resume, stop). Likewise Video-on-Demand (VoD).
+4. Default: it's to setup a multicast streams of MPEG, MPG, MP4, MOV files and operate them (play, pause, resume, stop). Likewise Video-on-Demand (VoD).
 5. It use a functionality of a built-in VideoLan Manager (VLM) of VLC player over any favorite web browser.
 6. Default: it allows to use SAP information (for players which support this).
 7. Interface was adapted for mobile devices with a small screen (sirca 3.5 inch).
 8. Can be used by people with a poor vision or big fingers.
 9. Suitable for headless ARM servers (under Unix/Linux) like Cubieboards, Raspberry Pi and many others.. Windows' option is also supported.
-10. (Not yet implemented , need help) Get audio stream of MP4 on the RC device (into a current web page).
+10. (Not yet implemented , need help) Get audio part of a stream on the RC device (into a current web page).
 
 ## Install and Use
 1. Download ZIP archive and unpack it. Under Unix/Linux COPY (DON'T REPLACE) a CONTENT of "http" folder (NOT FOLDER ITSELF) into: /usr/share/vlc/lua/http folder, under Windows - C:\Program Files\VideoLAN\VLC\lua\http\ .
