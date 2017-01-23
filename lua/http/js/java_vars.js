@@ -6,7 +6,7 @@ var charTilda ="~";
 var uriSlash = "%2F";
 var prefLen = 8;
 
-//var vlmStatus = "/requests/vlm.xml";
+var vlmStatus = "/requests/vlm.xml";
 var vlmCmd = "/requests/vlm_cmd.xml?command=";
 var cmdNew = "new ";
 var cmdSetup = "setup ";
@@ -31,3 +31,4 @@ var xmlDoc;
 var errMsg = "";
 var fPath = "";
 
+var classFiles, classTasks, classDivF, classDivT;

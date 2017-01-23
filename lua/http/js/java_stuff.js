@@ -1,6 +1,15 @@
 /*------------------ all JS stuff is here ------------------*/
 "use strict";
 
+function pageInit() {
+
+  classFiles = document.getElementById("idFiles").attributes.getNamedItem("class");
+  classTasks = document.getElementById("idTasks").attributes.getNamedItem("class");
+  classDivF = document.getElementById("idDivF").attributes.getNamedItem("class");
+  classDivT = document.getElementById("idDivT").attributes.getNamedItem("class");
+
+}
+
 function openFList( newDir, d ) {
 
 var tmpDir = "";
@@ -90,7 +99,11 @@ var tmpName = window.prompt("Please, input Task name for VLM.\nIt must be distin
   }
   strmName = tmpName + " ";
 
-  addrLastByte++;
+  if ( addrLastByte < 254 ) {
+    addrLastByte++;
+  } else {
+    addrLastByte = 1;
+  }
 var tmpByte = addrLastByte.toString();
 var tmpCmd = vlmCmd + encodeURIComponent(cmdNew + strmName + strmMode + strmEn + strmLoop + strmIn + filePath + strmOut1 + mcastIp + tmpByte + strmOut2 + mcastPort + strmOut3 + fileName + strmOutEnd);
 
@@ -138,6 +151,35 @@ function selectNo() {
 
   document.getElementById("idModal").style.display="none";
   addrLastByte--;
+
+}
+
+function fashionExchange() {
+
+var tmpValue = classFiles.value;
+
+  classFiles.value = classTasks.value;
+  classTasks.value = tmpValue;
+
+}
+
+function selectFiles() {
+
+  if ( classDivF.value.indexOf("w3-hide") != -1 ) {
+    classDivT.value = classDivT.value + " w3-hide";
+    classDivF.value = classDivF.value.replace(" w3-hide", "");
+    fashionExchange();
+  }
+
+}
+
+function selectTasks() {
+
+  if ( classDivT.value.indexOf("w3-hide") != -1 ) {
+    classDivF.value = classDivF.value + " w3-hide";
+    classDivT.value = classDivT.value.replace(" w3-hide", "");
+    fashionExchange();
+  }
 
 }
 

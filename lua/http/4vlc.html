@@ -12,18 +12,34 @@
 <script src="lib/w3data.js"></script>
 <script src="js/java_vars.js"></script>
 
-<body>
+<body onload="pageInit()">
 
   <div class="w3-row w3-padding-0">
     <div class="w3-col l3 w3-text-white w3-tiny"><p>Hidden Text</p></div>
     <div class="w3-col l6 w3-center">
       <div id="idSec" class="w3-container w3-padding-0" style="display:none">
+        <div class="w3-top">
+          <div class="w3-btn-group l6 w3-half w3-xlarge">
+            <button id="idFiles" class="w3-btn w3-white w3-wide" onclick="selectFiles()" style="width:50%"><b>Files</b></button>
+            <button id="idTasks" class="w3-btn w3-text-white w3-orange w3-wide" onclick="selectTasks()" style="width:50%"><b>Tasks</b></button>
+          </div>
+        </div>
+        <br>
+        <div id="idDivF" class="w3-section">
         <table id="idTbl" class="w3-table w3-striped w3-bordered w3-xlarge">
           <tr w3-repeat="element">
             <td width="10%">{{icon_type}}</td>
             <th width="90%" onclick="{{click_type}}">{{name}}</th>
           </tr>
         </table>
+        </div>
+        <div id="idDivT" class="w3-section w3-hide">
+        <table id="tblTasks" class="w3-table w3-striped w3-bordered w3-xlarge">
+          <tr w3-repeat="tasks">
+            <th width="100%" onclick="window.open(item.html?name=Test)">{{name}}</th>
+          </tr>
+        </table>
+        </div>
         <br>
         <div class="w3-btn w3-blue w3-text-white w3-xlarge w3-round-jumbo" onclick="closeFList()" style="width:60%">EXIT</div>
       </div>
