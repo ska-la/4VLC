@@ -61,7 +61,7 @@ var tmpIndex = newDir.lastIndexOf("/");
           jsonObj["element"][i].icon_type = '<img src="images/Other-48.png" alt="File">';
           indX = jsonObj["element"][i].name.lastIndexOf(".");
           if ( indX !== -1 ) {
-            tmpExt = jsonObj["element"][i].name.slice(indX +1);
+            tmpExt = jsonObj["element"][i].name.slice(indX +1).toLowerCase();
             var j;
             for ( j in extA ) {
               if ( extA[j] === tmpExt ) {
@@ -71,7 +71,7 @@ var tmpIndex = newDir.lastIndexOf("/");
             for ( j in extV ) {
               if ( extV[j] === tmpExt ) {
                 jsonObj["element"][i].icon_type = '<img src="images/Video-48.png" alt="File">';
-                if ( j >= 0 && j <= 3 ) {
+                if ( j >= 0 && j <= 4 ) {
                   tmpPath = jsonObj["element"][i].path.replace( /\\/g, "\\\\" );
                   jsonObj["element"][i].click_type = "tryStream('" + tmpPath + "','" + jsonObj["element"][i].name + "')";
                 } else {

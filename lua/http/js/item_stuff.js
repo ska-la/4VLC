@@ -187,31 +187,34 @@ function vlmStatReq() {
 
 function getTrackLen( aTtrs ) {
 
-var tmpNum, tmpNum2;
-var tmpTime = "";
+var tempNum, tempNum2;
+var tempTime = "";
 
-  tmpNum = Number(aTtrs.getNamedItem("length").nodeValue.slice(0,-6));
-  tmpNum2 = tmpNum%60;
-  if ( tmpNum2 < 10 ) {
-    tmpTime = ":0" + (tmpNum2).toFixed(0);
+  tempNum = Number(aTtrs.getNamedItem("length").nodeValue.slice(0,-6));
+  tempNum2 = tempNum%60;
+  if ( tempNum2 < 10 ) {
+    tempTime = ":0" + (tempNum2).toFixed(0);
   } else {
-    tmpTime = ":" + (tmpNum2).toFixed(0);
+    tempTime = ":" + (tempNum2).toFixed(0);
   }
-  tmpNum -= tmpNum2;
-  tmpNum2 = (tmpNum%3600)/60;
-  if ( tmpNum2 < 10 ) {
-    tmpTime = ":0" + (tmpNum2).toFixed(0) + tmpTime;
+  tempNum -= tempNum2;
+  tempNum2 = (tempNum%3600)/60;
+  if ( tempNum2 < 10 ) {
+    tempTime = ":0" + (tempNum2).toFixed(0) + tempTime;
   } else {
-    tmpTime = ":" + (tmpNum2).toFixed(0) + tmpTime;
+    tempTime = ":" + (tempNum2).toFixed(0) + tempTime;
   }
-  tmpNum -= tmpNum2*60;
-  tmpNum2 = (tmpNum%86400)/3600;
-  if ( tmpNum2 < 10 ) {
-    tmpTime = "0" + (tmpNum2).toFixed(0) + tmpTime;
+  tempNum -= tempNum2*60;
+  tempNum2 = (tempNum%86400)/3600;
+  if ( tempNum2 < 10 ) {
+    tempTime = "0" + (tempNum2).toFixed(0) + tempTime;
   } else {
-    tmpTime = (tmpNum2).toFixed(0) + tmpTime;
+    tempTime = (tempNum2).toFixed(0) + tempTime;
   }
-  document.getElementById("timeTotal").innerHTML = tmpTime;
+  document.getElementById("timeTotal").innerHTML = tempTime;
+  if ( tempTime !== "00:00:00" ) {
+    knownLength = true;
+  }
 
 }
 
@@ -231,7 +234,6 @@ var tmpTime = "";
   }
   if ( ! knownLength ) {
     getTrackLen( tmpAttrs );
-    knownLength = true;
   }
   tmpNum = Number(tmpAttrs.getNamedItem("time").nodeValue.slice(0,-6));
   tmpNum2 = tmpNum%60;
