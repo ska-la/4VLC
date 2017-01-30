@@ -26,7 +26,7 @@ var strmOutEnd = '"}';
 var extA = ["mp3", "ogg", "flac", "wma", "wav"];
 var extV = ["mp4", "mpeg", "mpg", "mov", "vob", "avi", "mkv", "ogv", "wmv", "webm"];
 
-var jsonObj;
+var jsonObj, tasksObj;
 var xmlDoc;
 var errMsg = "";
 var fPath = "";

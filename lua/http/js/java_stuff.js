@@ -176,10 +176,43 @@ function selectFiles() {
 function selectTasks() {
 
   if ( classDivT.value.indexOf("w3-hide") != -1 ) {
+    taskList();
     classDivF.value = classDivF.value + " w3-hide";
     classDivT.value = classDivT.value.replace(" w3-hide", "");
     fashionExchange();
   }
+
+}
+
+function taskList() {
+
+var brList;
+
+  w3Http( vlmStatus , function () {
+      if ( this.readyState == 4 && this.status == 200 ) {
+        xmlDoc = this.responseXML;
+        buildTaskList();
+        w3DisplayData("tblTasks", tasksObj);
+      } else  if ( this.readyState == 4 && this.status != 200 ) {
+        vlcFail( this );
+      }
+      function buildTaskList() {
+        var t, listLen;
+        var strTasks = '{"task":[';
+        
+        brList = xmlDoc.getElementsByTagName("broadcast");
+        listLen = brList.length;
+        for ( t=0; t < listLen; t++ ) {
+          strTasks += '{"name":"' + brList[t].attributes.getNamedItem("name").nodeValue + '"}';
+          if ( t != listLen - 1 ) {
+            strTasks += "," ;
+          }
+        }
+        strTasks += ']}';
+        tasksObj = JSON.parse(strTasks);
+      }
+    }
+  );
 
 }
 
