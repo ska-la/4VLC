@@ -2,7 +2,7 @@
 1. It's not yet another player based on VLC at all.
 2. It's only yet another Remote Control for VLM (not Telnet interface).
 3. It's a set of additional files which are placed side-by-side with common VLC http files (into ../lua/http folder).
-4. Default: it's to setup a multicast streams of MPEG, MPG, MP4, MOV files and operate them (play, pause, resume, stop). Likewise Video-on-Demand (VoD).
+4. Default: it's to setup a multicast streams of MPEG, MPG, MP4, MOV and VOB files and operate them (play, pause, resume, stop). Likewise Video-on-Demand (VoD).
 5. It use a functionality of a built-in VideoLan Manager (VLM) of VLC player over any favorite web browser.
 6. Default: it allows to use SAP information (for players which support this).
 7. Interface was adapted for mobile devices with a small screen (sirca 3.5 inch).
@@ -18,11 +18,11 @@
   Tools -> Preferences -> All -> Interface -> Main interfaces -> Web
   ```
  * Unix/Linux: 
-  ```
-  cvlc -I http --http-password <your password>
+  ```shell
+  cvlc -I http --http-password <your password> --http-host 127.0.0.1 --http-port 8080
   ```
  for details look at [there] (https://wiki.videolan.org/Documentation:Modules/http_intf/).
-3. Connect to VLC's web interface. Open your favorite web browser and input http://localhost:8080/ or http://\<your desired ip address\>:8080/ into address bar. Also you can add path ..:8080/mobile.html . Play with it. May be that's all of you need.
+3. Connect to VLC's web interface. Open your favorite web browser and input http://localhost:8080/ or http://\<your desired ip address\>:8080/ into address bar. Also you can add path ..:8080/mobile.html or vlm.html . Play with it. May be that's all of you need.
 4. Now input http://\<your ip addr\>:8080/4vlc.html and compare with our solution. You can receive the created streams with any player which support a playback of a multicast stream. You can start another instance of VLC and use View -> Playlist -> Network streams(SAP). Choose desired stream and Play it.
 
 ## GUI (with pics)
