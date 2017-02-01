@@ -36,7 +36,7 @@
         <div id="idDivT" class="w3-section w3-hide">
         <table id="tblTasks" class="w3-table w3-striped w3-bordered w3-xlarge">
           <tr w3-repeat="task">
-            <th width="100%" onclick="window.open(item.html?name=Test)">{{name}}</th>
+            <th width="100%" onclick='window.open("item.html?name={{name}}")'>{{name}}</th>
           </tr>
         </table>
         </div>

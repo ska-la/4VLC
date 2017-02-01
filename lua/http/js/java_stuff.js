@@ -166,6 +166,7 @@ var tmpValue = classFiles.value;
 function selectFiles() {
 
   if ( classDivF.value.indexOf("w3-hide") != -1 ) {
+    clearInterval( pollVlm );
     classDivT.value = classDivT.value + " w3-hide";
     classDivF.value = classDivF.value.replace(" w3-hide", "");
     fashionExchange();
@@ -177,6 +178,7 @@ function selectTasks() {
 
   if ( classDivT.value.indexOf("w3-hide") != -1 ) {
     taskList();
+    pollVlm = setInterval( taskList, 5000 );
     classDivF.value = classDivF.value + " w3-hide";
     classDivT.value = classDivT.value.replace(" w3-hide", "");
     fashionExchange();

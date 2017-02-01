@@ -1,4 +1,5 @@
 /*------------------------------- JS stuff for item.html -------------------------------*/
+"use strict";
 
 function pageInit() {
 
@@ -31,13 +32,29 @@ function getPageParam( strPageURI, strParam ) {
 function fillPage() {
 
 var tmpName = "";
+var inStance;
 
   brIndex = getTagIndex( xmlDoc, "broadcast" );
+  if ( brIndex === -1 ) {
+    window.close();
+  }
   brXmlPart = xmlDoc.getElementsByTagName("broadcast")[brIndex];
   var tagAttrs = brXmlPart.attributes;
   tmpName = tagAttrs.getNamedItem("name").nodeValue;
   document.getElementById("nameInfo").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
   document.getElementById("nameInfo2").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
+  inStance = brXmlPart.getElementsByTagName("instance")[0];
+  if ( inStance != undefined ) {
+    dynDecor();
+    if ( inStance.attributes.getNamedItem("state").nodeValue === "playing" ) {
+      pollVlm = setInterval( vlmStatReq, 3141 );
+    }
+    if ( inStance.attributes.getNamedItem("state").nodeValue === "paused" ) {
+      document.getElementById("idPause").innerHTML = resumeDecor;
+    }
+    document.getElementById("idStop").style.display = "none";
+    document.getElementById("idPlay").style.display = "block";
+  }
   if ( tagAttrs.getNamedItem("loop").nodeValue === "yes" ) {
     loopEd = true;
   } else {
@@ -67,6 +84,10 @@ function getTagIndex( dXml, tName ) {
   var j, aTtribs;
   for ( j in tAgs ) {
     aTtribs = tAgs[j].attributes;
+    if ( aTtribs == undefined ) {
+      window.alert("VLM has not the task!");
+      return -1;
+    }
     if ( aTtribs.getNamedItem( attrName ).nodeValue === document.title ) {
       return j;
     }
@@ -175,6 +196,9 @@ function vlmStatReq() {
       if ( this.readyState == 4 && this.status == 200 ) {
         xmlDoc = this.responseXML;
         brIndex = getTagIndex( xmlDoc, "broadcast" );
+        if ( brIndex === -1 ) {
+          window.close();
+        }
         brXmlPart = xmlDoc.getElementsByTagName("broadcast")[brIndex];
         dynDecor();
       } else  if ( this.readyState == 4 && this.status != 200 ) {

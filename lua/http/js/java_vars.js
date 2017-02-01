@@ -30,5 +30,6 @@ var jsonObj, tasksObj;
 var xmlDoc;
 var errMsg = "";
 var fPath = "";
+var pollVlm;
 
 var classFiles, classTasks, classDivF, classDivT;
