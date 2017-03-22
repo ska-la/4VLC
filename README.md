@@ -21,7 +21,7 @@
   ```shell
   cvlc -I http --http-password <your password> --http-host 127.0.0.1 --http-port 8080
   ```
- for details look at [there] (https://wiki.videolan.org/Documentation:Modules/http_intf/).
+ for details look at [there](https://wiki.videolan.org/Documentation:Modules/http_intf/).
 3. Connect to VLC's web interface. Open your favorite web browser and input http://localhost:8080/ or http://\<your desired ip address\>:8080/ into address bar. Also you can add path ..:8080/mobile.html or vlm.html . Play with it. May be that's all of you need.
 4. Now input http://\<your ip addr\>:8080/4vlc.html and compare with our solution. You can receive the created streams with any player which support a playback of a multicast stream. You can start another instance of VLC and use View -> Playlist -> Network streams(SAP). Choose desired stream and Play it.
 
