@@ -30,9 +30,5 @@
 [There is](https://github.com/ska-la/4VLC/wiki/).
 
 ---
-### VIDEO
-<iframe width="560" height="315" src="https://www.youtube.com/embed/acSBIy8_sl8?rel=0" frameborder="0" allowfullscreen></iframe>
-
----
 
 Use a lot of big screen devices (TVs, Monitors, Projectors and so on) to view your streams and control them with your old fashion phone with small screen. Don't harm your eyes. Have a nice day.
