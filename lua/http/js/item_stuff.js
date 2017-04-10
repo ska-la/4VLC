@@ -13,11 +13,9 @@ function pageInit() {
       }
     }
   );
-
 }
 
 function getPageParam( strPageURI, strParam ) {
-
   var tmpParams = strPageURI.slice( strPageURI.lastIndexOf("?") + 1 );
   var tmpArr = tmpParams.split("&");
   var j;
@@ -26,11 +24,9 @@ function getPageParam( strPageURI, strParam ) {
       return tmpArr[j].slice( tmpArr[j].lastIndexOf("=") + 1 );
     }
   }
-
 }
 
 function fillPage() {
-
 var tmpName = "";
 var inStance;
 
@@ -68,18 +64,25 @@ var inStance;
   }
   var inputsArr = brXmlPart.getElementsByTagName("input");
   var tmpStr = "";
+  var tmpFiles = "";
+  var fullPath = "";
   var arrLen = inputsArr.length;
-  var j;
+  var j,k;
     for ( j=0; j < arrLen; j++ ) {
-      tmpStr += inputsArr[j].childNodes[0].nodeValue + "<br>";
+      fullPath = inputsArr[j].childNodes[0].nodeValue;
+      tmpStr += fullPath + "<br>";
+      if ( (k = fullPath.lastIndexOf("/")) == -1 ) {
+        tmpFiles += fullPath.slice(fullPath.lastIndexOf("\\") + 1) + "<br>";
+      } else {
+        tmpFiles += fullPath.slice(k+1) + "<br>";
+      }
     }
   document.getElementById("inputInfo").innerHTML = tmpStr;
   document.getElementById("outputInfo").innerHTML = brXmlPart.getElementsByTagName("output")[0].childNodes[0].nodeValue;
-
+  document.getElementById("idFiles").innerHTML = tmpFiles;
 }
 
 function getTagIndex( dXml, tName ) {
-
   var tAgs = dXml.getElementsByTagName( tName );
   var attrName = "name";
   var j, aTtribs;
@@ -93,11 +96,9 @@ function getTagIndex( dXml, tName ) {
       return j;
     }
   }
-
 }
 
 function delItem() {
-
 var tmpCmd = vlmCmd + cmdDel + document.title;
 
   w3Http( tmpCmd, function () {
@@ -113,11 +114,9 @@ var tmpCmd = vlmCmd + cmdDel + document.title;
       }
     }
   );
-
 }
 
 function playItem() {
-
 var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlPlay + currFileIndex.toString();
 
   w3Http( tmpCmd, function () {
@@ -135,11 +134,9 @@ var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlPlay + currFileInd
       }
     }
   );
-
 }
 
 function stopItem() {
-
 var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlStop;
 
   w3Http( tmpCmd, function () {
@@ -155,11 +152,9 @@ var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlStop;
       }
     }
   );
-
 }
 
 function pauseItem() {
-
 var tmpCmd = vlmCmd + cmdControl + document.title + " ";
 var btnPause = document.getElementById("idPause");
 
@@ -188,11 +183,9 @@ var btnPause = document.getElementById("idPause");
       }
     }
   );
-
 }
 
 function vlmStatReq() {
-
   w3Http( vlmStatus , function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         xmlDoc = this.responseXML;
@@ -207,11 +200,9 @@ function vlmStatReq() {
       }
     }
   );
-
 }
 
 function getTrackLen( aTtrs ) {
-
 var tempNum, tempNum2;
 var tempTime = "";
 
@@ -240,11 +231,9 @@ var tempTime = "";
   if ( tempTime !== "00:00:00" ) {
     knownLength = true;
   }
-
 }
 
 function dynDecor() {
-
 var tmpAttrs, tmpNum, tmpNum2;
 var tmpTime = "";
 
@@ -284,11 +273,9 @@ var tmpTime = "";
   document.getElementById("timeElapsed").innerHTML = tmpTime;
   tmpNum = Number(tmpAttrs.getNamedItem("position").nodeValue.slice(2,4));
   document.getElementById("idProgress").style.width = tmpNum + "%";
-
 }
 
 function editSap() {
-
 var tmpCmd = "";
 
   var tmpStr = brXmlPart.getElementsByTagName("output")[0].childNodes[0].nodeValue;
@@ -312,11 +299,9 @@ var tmpCmd = "";
     }
   );
   }
-
 }
 
 function changeLoop() {
-
 var tmpLoop = "";
 
   if ( loopEd ) {
@@ -342,7 +327,6 @@ var tmpLoop = "";
       }
     }
   );
-
 }
 
 function stopThen() {
@@ -354,7 +338,6 @@ function stopThen() {
 }
 
 function howToAccess() {
-
 var tmpAccess = "";
 
   var tmpStr = brXmlPart.getElementsByTagName("output")[0].childNodes[0].nodeValue;
@@ -371,6 +354,15 @@ var tmpAccess = "";
   var tmpAccess = tmpAccess + tmpStr.slice( firstQuote + 1, secondQuote );
 
   return tmpAccess;
+}
+
+function shDetails() {
+var det = document.getElementById("idDetails");
+  if ( det.className.indexOf("w3-show") == -1 ) {
+    det.className = det.className + " w3-show";
+  } else {
+    det.className = det.className.replace("w3-show" ,"");
+  }
 }
 
 function vlcError() {

@@ -24,7 +24,7 @@ var strmOut3 = ',sdp=sap,name="';
 var strmOutEnd = '"}';
 
 var extA = ["mp3", "ogg", "flac", "wma", "wav"];
-var extV = ["mp4", "mpeg", "mpg", "mov", "vob", "avi", "mkv", "ogv", "wmv", "webm"];
+var extV = ["mp4", "mpeg", "mpg", "mov", "vob", "mkv", "avi", "ogv", "wmv", "webm"];
 
 var jsonObj, tasksObj;
 var xmlDoc;
