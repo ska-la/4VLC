@@ -43,6 +43,7 @@ var inStance;
   tmpName = tagAttrs.getNamedItem("name").nodeValue;
   document.getElementById("nameInfo").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
   document.getElementById("nameInfo2").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
+  document.getElementById("accessInfo").innerHTML = "<h2><b>" + howToAccess() + "</b></h2>";
   inStance = brXmlPart.getElementsByTagName("instance")[0];
   if ( inStance != undefined ) {
     dynDecor();
@@ -350,6 +351,26 @@ function stopThen() {
   document.getElementById("idPlay").style.display = "none";
   document.getElementById("idStop").style.display = "block";
   document.getElementById("idPause").innerHTML = pauseDecor;
+}
+
+function howToAccess() {
+
+var tmpAccess = "";
+
+  var tmpStr = brXmlPart.getElementsByTagName("output")[0].childNodes[0].nodeValue;
+  var firstQuote = tmpStr.indexOf("#");
+  var secondQuote = tmpStr.indexOf("{");
+  var tmpAccess = tmpStr.slice( firstQuote + 1, secondQuote ) + "://";
+
+  var firstQuote = tmpStr.indexOf("dst=") + 3;
+  var secondQuote = tmpStr.indexOf(",port=");
+  var tmpAccess = tmpAccess + tmpStr.slice( firstQuote + 1, secondQuote ) + ":";
+
+  var firstQuote = secondQuote + 5;
+  var secondQuote = tmpStr.indexOf(",sdp=");
+  var tmpAccess = tmpAccess + tmpStr.slice( firstQuote + 1, secondQuote );
+
+  return tmpAccess;
 }
 
 function vlcError() {
