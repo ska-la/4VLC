@@ -27,7 +27,7 @@ function getPageParam( strPageURI, strParam ) {
 }
 
 function fillPage() {
-var tmpName = "";
+//var tmpName = "";
 var inStance;
 
   brIndex = getTagIndex( xmlDoc, "broadcast" );
@@ -36,9 +36,9 @@ var inStance;
   }
   brXmlPart = xmlDoc.getElementsByTagName("broadcast")[brIndex];
   var tagAttrs = brXmlPart.attributes;
-  tmpName = tagAttrs.getNamedItem("name").nodeValue;
+/*  tmpName = tagAttrs.getNamedItem("name").nodeValue;
   document.getElementById("nameInfo").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
-  document.getElementById("nameInfo2").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
+  document.getElementById("nameInfo2").innerHTML = "<h2><b>" + tmpName + "</b></h2>";    */
   document.getElementById("accessInfo").innerHTML = "<h2><b>" + howToAccess() + "</b></h2>";
   inStance = brXmlPart.getElementsByTagName("instance")[0];
   if ( inStance != undefined ) {
@@ -248,6 +248,7 @@ var tmpTime = "";
   }
   if ( ! knownLength ) {
     getTrackLen( tmpAttrs );
+    document.getElementById("fileName").innerHTML = getFileName();
   }
   tmpNum = Number(tmpAttrs.getNamedItem("time").nodeValue.slice(0,-6));
   tmpNum2 = tmpNum%60;
@@ -363,6 +364,11 @@ var det = document.getElementById("idDetails");
   } else {
     det.className = det.className.replace("w3-show" ,"");
   }
+}
+
+function getFileName() {
+  var tmpPath = brXmlPart.getElementsByTagName("input")[currFileIndex-1].childNodes[0].nodeValue;
+  return tmpPath.slice(tmpPath.lastIndexOf("/")+1);
 }
 
 function vlcError() {
