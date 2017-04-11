@@ -185,6 +185,30 @@ var btnPause = document.getElementById("idPause");
   );
 }
 
+function nextItem() {
+var tmpLen = brXmlPart.getElementsByTagName("input").length;
+  if ( tmpLen > 1 ) {
+    if ( tmpLen > currFileIndex ) {
+      currFileIndex++;
+    } else {
+      currFileIndex = 1;
+    }
+  }
+  npItemPlay();
+}
+
+function prevItem() {
+var tmpLen = brXmlPart.getElementsByTagName("input").length;
+  if ( tmpLen > 1 ) {
+    if ( currFileIndex > 1 ) {
+      currFileIndex--;
+    } else {
+      currFileIndex = tmpLen;
+    }
+  }
+  npItemPlay();
+}
+
 function vlmStatReq() {
   w3Http( vlmStatus , function () {
       if ( this.readyState == 4 && this.status == 200 ) {
@@ -369,6 +393,13 @@ var det = document.getElementById("idDetails");
 function getFileName() {
   var tmpPath = brXmlPart.getElementsByTagName("input")[currFileIndex-1].childNodes[0].nodeValue;
   return tmpPath.slice(tmpPath.lastIndexOf("/")+1);
+}
+
+function npItemPlay() {
+  clearInterval( pollVlm );
+  document.getElementById("idPause").innerHTML = pauseDecor;
+  knownLength = false;
+  playItem();
 }
 
 function vlcError() {
