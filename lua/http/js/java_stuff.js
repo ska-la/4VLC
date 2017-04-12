@@ -110,7 +110,7 @@ var tmpCmd = vlmCmd + encodeURIComponent(cmdNew + strmName + strmMode + strmEn +
   w3Http( tmpCmd , function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         if ( this.responseText.length == 84 ) {
-          window.open( "item.html?name=" + tmpName );
+          window.open("item.html?name=" + encodeURIComponent(tmpName));
         } else {
           xmlDoc = this.responseXML;
           errMsg = xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue;
@@ -143,8 +143,7 @@ var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + strmName + strmIn + fPath + 
       }
     }
   );
-  document.getElementById("idModal").style.display="none";
-
+  selectNo();
 }
 
 function selectNo() {

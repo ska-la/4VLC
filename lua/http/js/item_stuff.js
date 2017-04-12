@@ -3,7 +3,7 @@
 
 function pageInit() {
 
-  document.title = getPageParam( window.location.href, "name" );
+  document.title = decodeURIComponent(getPageParam( window.location.href, "name" ));
   w3Http( vlmStatus , function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         xmlDoc = this.responseXML;
@@ -27,7 +27,6 @@ function getPageParam( strPageURI, strParam ) {
 }
 
 function fillPage() {
-//var tmpName = "";
 var inStance;
 
   brIndex = getTagIndex( xmlDoc, "broadcast" );
@@ -36,9 +35,6 @@ var inStance;
   }
   brXmlPart = xmlDoc.getElementsByTagName("broadcast")[brIndex];
   var tagAttrs = brXmlPart.attributes;
-/*  tmpName = tagAttrs.getNamedItem("name").nodeValue;
-  document.getElementById("nameInfo").innerHTML = "<h2><b>" + tmpName + "</b></h2>";
-  document.getElementById("nameInfo2").innerHTML = "<h2><b>" + tmpName + "</b></h2>";    */
   document.getElementById("accessInfo").innerHTML = "<h2><b>" + howToAccess() + "</b></h2>";
   inStance = brXmlPart.getElementsByTagName("instance")[0];
   if ( inStance != undefined ) {
@@ -193,8 +189,8 @@ var tmpLen = brXmlPart.getElementsByTagName("input").length;
     } else {
       currFileIndex = 1;
     }
+    npItemPlay();
   }
-  npItemPlay();
 }
 
 function prevItem() {
@@ -205,8 +201,8 @@ var tmpLen = brXmlPart.getElementsByTagName("input").length;
     } else {
       currFileIndex = tmpLen;
     }
+    npItemPlay();
   }
-  npItemPlay();
 }
 
 function vlmStatReq() {
