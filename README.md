@@ -10,7 +10,7 @@
 9. Suitable for headless ARM servers (under Unix/Linux) like Cubieboards, Raspberry Pi and many others.. Windows' option is also supported.
 10. (Not yet implemented , need help) Get audio part of a stream on the RC device (into a current web page).
 
-![stream page](https://github.com/ska-la/4VLC.wiki/Start.jpg)
+![stream page](https://github.com/ska-la/4VLC/wiki/Start.jpg)
 
 ## Install and Use
 1. Download ZIP archive and unpack it. Under Unix/Linux COPY (DON'T REPLACE) a CONTENT of "http" folder (NOT FOLDER ITSELF) into: /usr/share/vlc/lua/http folder, under Windows - C:\Program Files\VideoLAN\VLC\lua\http\ .
@@ -33,4 +33,7 @@
 
 ---
 
+[Demo video.](https://youtu.be/zo0UYdu-c48)
+
+---
 Use a lot of big screen devices (TVs, Monitors, Projectors and so on) to view your streams and control them with your old fashion phone with small screen. Don't harm your eyes. Have a nice day.
