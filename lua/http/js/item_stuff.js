@@ -28,7 +28,6 @@ function getPageParam( strPageURI, strParam ) {
 
 function fillPage() {
 var inStance;
-
   brIndex = getTagIndex( xmlDoc, "broadcast" );
   if ( brIndex === -1 ) {
     window.close();
@@ -96,7 +95,6 @@ function getTagIndex( dXml, tName ) {
 
 function delItem() {
 var tmpCmd = vlmCmd + cmdDel + document.title;
-
   w3Http( tmpCmd, function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         if ( this.responseText.length == 84 ) {
@@ -114,7 +112,6 @@ var tmpCmd = vlmCmd + cmdDel + document.title;
 
 function playItem() {
 var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlPlay + currFileIndex.toString();
-
   w3Http( tmpCmd, function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         if ( this.responseText.length == 84 ) {
@@ -134,7 +131,6 @@ var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlPlay + currFileInd
 
 function stopItem() {
 var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlStop;
-
   w3Http( tmpCmd, function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         if ( this.responseText.length == 84 ) {
@@ -150,16 +146,13 @@ var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlStop;
   );
 }
 
-function pauseItem() {
+function pauseItem(btnPause) {
 var tmpCmd = vlmCmd + cmdControl + document.title + " ";
-var btnPause = document.getElementById("idPause");
-
   if ( btnPause.innerHTML === pauseDecor ) {
     tmpCmd = tmpCmd + ctrlPause;
   } else {
     tmpCmd = tmpCmd + ctrlPlay + currFileIndex.toString();
   }
-
   w3Http( tmpCmd, function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         if ( this.responseText.length == 84 ) {
@@ -225,7 +218,6 @@ function vlmStatReq() {
 function getTrackLen( aTtrs ) {
 var tempNum, tempNum2;
 var tempTime = "";
-
   tempNum = Number(aTtrs.getNamedItem("length").nodeValue.slice(0,-6));
   tempNum2 = tempNum%60;
   if ( tempNum2 < 10 ) {
@@ -256,7 +248,6 @@ var tempTime = "";
 function dynDecor() {
 var tmpAttrs, tmpNum, tmpNum2;
 var tmpTime = "";
-
   if ( brXmlPart.getElementsByTagName("instance")[0] == undefined ) {
     stopThen();
   }
@@ -298,12 +289,10 @@ var tmpTime = "";
 
 function editSap() {
 var tmpCmd = "";
-
   var tmpStr = brXmlPart.getElementsByTagName("output")[0].childNodes[0].nodeValue;
   var firstQuote = tmpStr.indexOf("\"");
   var secondQuote = tmpStr.lastIndexOf("\"");
   var tmpSapName = tmpStr.slice( firstQuote + 1, secondQuote );
-
   var newName = window.prompt("Input another name to distinguish your stream\ninto a list of Service Advertising Protocol(SAP).", tmpSapName);
   if ( newName != null && newName !== tmpSapName ) {
     tmpStr = tmpStr.replace(tmpSapName,newName);
@@ -324,7 +313,6 @@ var tmpCmd = "";
 
 function changeLoop() {
 var tmpLoop = "";
-
   if ( loopEd ) {
     document.getElementById("idCheck").innerHTML = squareImg;
     tmpLoop = " unloop";
@@ -334,9 +322,7 @@ var tmpLoop = "";
     tmpLoop = " loop";
     loopEd = true;
   }
-
   var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + document.title + tmpLoop);
-
   w3Http( tmpCmd , function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         if ( this.responseText.length != 84 ) {
@@ -360,29 +346,27 @@ function stopThen() {
 
 function howToAccess() {
 var tmpAccess = "";
-
   var tmpStr = brXmlPart.getElementsByTagName("output")[0].childNodes[0].nodeValue;
   var firstQuote = tmpStr.indexOf("#");
   var secondQuote = tmpStr.indexOf("{");
   var tmpAccess = tmpStr.slice( firstQuote + 1, secondQuote ) + "://";
-
   var firstQuote = tmpStr.indexOf("dst=") + 3;
   var secondQuote = tmpStr.indexOf(",port=");
   var tmpAccess = tmpAccess + tmpStr.slice( firstQuote + 1, secondQuote ) + ":";
-
   var firstQuote = secondQuote + 5;
   var secondQuote = tmpStr.indexOf(",sdp=");
   var tmpAccess = tmpAccess + tmpStr.slice( firstQuote + 1, secondQuote );
-
   return tmpAccess;
 }
 
-function shDetails() {
+function shDetails(detB) {
 var det = document.getElementById("idDetails");
   if ( det.className.indexOf("w3-show") == -1 ) {
     det.className = det.className + " w3-show";
+    detB.innerHTML = chevronUpImg;
   } else {
     det.className = det.className.replace("w3-show" ,"");
+    detB.innerHTML = chevronImg;
   }
 }
 
@@ -418,7 +402,6 @@ var tmpDelta = "";
   } else {
     tmpCmd += tmpDelta;
   }
-  window.alert(tmpCmd);
   w3Http( tmpCmd, function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         if ( this.responseText.length == 84 ) {

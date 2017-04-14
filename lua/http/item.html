@@ -40,7 +40,7 @@
           </tr>
         </table>
         <p id="idFiles" style="font-size:150%"></p>
-        <button class="w3-btn w3-section w3-grey w3-text-white w3-xlarge" onclick="shDetails()" style="width:60%"><b>Details...</b></button>
+        <button class="w3-btn w3-section w3-grey w3-text-white w3-xlarge" onclick="shDetails(this)" style="width:60%"><b>Details </b><i class="fa fa-chevron-down"></i></button>
         <div id="idDetails" class="w3-hide">
           <h4>Input:</h4><p id="inputInfo"></p>
           <h4>Output:</h4><p id="outputInfo"></p>
@@ -66,7 +66,7 @@
         </div>
         <div class="w3-btn-group w3-xlarge w3-section">
           <button class="w3-btn w3-black w3-text-orange w3-wide" onclick="stopItem()" style="width:50%"><b>Stop </b><i class="fa fa-stop"></i></button>
-          <button id="idPause" class="w3-btn w3-orange w3-wide" onclick="pauseItem()" style="width:50%"><b>Pause </b><i class="fa fa-pause"></i></button>
+          <button id="idPause" class="w3-btn w3-orange w3-wide" onclick="pauseItem(this)" style="width:50%"><b>Pause </b><i class="fa fa-pause"></i></button>
         </div>
         <h4>Accessible via:</h4><p id="accessInfo"></p>
       </div>

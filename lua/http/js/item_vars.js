@@ -15,6 +15,9 @@ var ctrlSeek = "seek ";
 var pauseDecor = '<b>Pause </b><i class="fa fa-pause"></i>';
 var resumeDecor = '<b>Resume </b><i class="fa fa-play"></i>';
 
+var chevronImg = '<b>Details </b><i class="fa fa-chevron-down"></i>';
+var chevronUpImg = '<b>Details </b><i class="fa fa-chevron-up"></i>';
+
 var squareImg = '<i class="fa fa-square-o fa-stack-2x"></i>';
 var checkImg = '<i class="fa fa-check fa-stack-2x" style="color:orange"></i>';
 
