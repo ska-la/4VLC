@@ -2,7 +2,7 @@
 1. It's not yet another player based on VLC at all.
 2. It's only yet another Remote Control for VLM (not Telnet interface).
 3. It's a set of additional files which are placed side-by-side with common VLC http files (into ../lua/http folder).
-4. Default: it's to setup a multicast streams of MPEG, MPG, MP4, MOV, VOB and MKV (not H.265) files and operate them. VLM's control commands play, pause, stop and seek [+-](percentage) are used on backplane. Likewise Video-on-Demand (VoD).
+4. Default: it's to setup a multicast streams of MPEG, MPG, MP4, MOV, VOB and MKV (not H.265) files and operate them. VLM's control commands play, pause, stop and seek [+-] (percentage) are used on backplane. Likewise Video-on-Demand (VoD).
 5. It use a functionality of a built-in VideoLan Manager (VLM) of VLC player over any favorite web browser.
 6. Default: it allows to use SAP information (for players which support this).
 7. Interface was adapted for mobile devices with a small screen (sirca 3.5 inch).
