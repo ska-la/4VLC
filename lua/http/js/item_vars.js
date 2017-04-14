@@ -10,6 +10,7 @@ var cmdSetup = "setup ";
 var ctrlPlay = "play ";
 var ctrlPause = "pause";
 var ctrlStop = "stop";
+var ctrlSeek = "seek ";
 
 var pauseDecor = '<b>Pause </b><i class="fa fa-pause"></i>';
 var resumeDecor = '<b>Resume </b><i class="fa fa-play"></i>';

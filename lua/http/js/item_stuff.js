@@ -398,6 +398,42 @@ function npItemPlay() {
   playItem();
 }
 
+function swiftMove(evnt) {
+var scrnWidth = screen.width;
+var currProgress = document.getElementById("idProgress").style.width;
+var newProgress = 0;
+var deltaX = 0;
+var currPress = evnt.clientX;
+var tmpCmd = vlmCmd + cmdControl + document.title + " " + ctrlSeek;
+var tmpDelta = "";
+  if ( scrnWidth > 992 ) {
+    deltaX = scrnWidth/4;
+    newProgress = (currPress-deltaX)*100/(2*deltaX);
+  } else {
+    newProgress = currPress*100/scrnWidth;
+  }
+  tmpDelta = (newProgress.toFixed(0) - Number(currProgress.slice(0,-1))).toString();
+  if ( tmpDelta.charAt(0) !== "-" ) {
+    tmpCmd += "+" + tmpDelta;
+  } else {
+    tmpCmd += tmpDelta;
+  }
+  window.alert(tmpCmd);
+  w3Http( tmpCmd, function () {
+      if ( this.readyState == 4 && this.status == 200 ) {
+        if ( this.responseText.length == 84 ) {
+          return;
+        } else {
+          xmlDoc = this.responseXML;
+          vlcError();
+        }
+      } else  if ( this.readyState == 4 && this.status != 200 ) {
+        vlcFail( this );
+      }
+    }
+  );
+}
+
 function vlcError() {
   window.alert( xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue );
 }
