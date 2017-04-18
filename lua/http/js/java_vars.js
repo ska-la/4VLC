@@ -32,4 +32,7 @@ var errMsg = "";
 var fPath = "";
 var pollVlm;
 
+var filePath = "";
+var fileName = "";
+
 var classFiles, classTasks, classDivF, classDivT;

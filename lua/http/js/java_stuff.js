@@ -90,10 +90,19 @@ var tmpIndex = newDir.lastIndexOf("/");
 
 }
 
-function tryStream( filePath, fileName ) {
+function tryStream( curFilePath, curFileName ) {
+var ulArr = document.getElementById("ulTasks").getElementsByTagName("li");
+var ulArrLen = ulArr.length;
+var k = 0;
+  for (k; k<ulArrLen; k++) {
+    ulArr[k].style.display = "none";
+  }
+  filePath = curFilePath;
+  fileName = curFileName;
+  document.getElementById("idTaskName").style.display = "block";
+}
 
-var tmpName = window.prompt("Please, input Task name for VLM.\nIt must be distinguished from others\nalready exists.", "Test");
-
+function tryStream2(tmpName) {
   if ( tmpName == null || tmpName == "" ) {
     return;
   }
@@ -116,7 +125,7 @@ var tmpCmd = vlmCmd + encodeURIComponent(cmdNew + strmName + strmMode + strmEn +
           errMsg = xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue;
           if ( errMsg.slice(-19) === "Name already in use" ) {
             fPath = filePath;
-            document.getElementById("idModal").style.display="block";
+            addMoreFile();
           } else {
             window.alert( errMsg );
           }
@@ -128,8 +137,7 @@ var tmpCmd = vlmCmd + encodeURIComponent(cmdNew + strmName + strmMode + strmEn +
   );
 }
 
-function selectYes() {
-
+function addMoreFile() {
 var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + strmName + strmIn + fPath + '"');
 
   w3Http( tmpCmd , function () {
@@ -143,38 +151,25 @@ var tmpCmd = vlmCmd + encodeURIComponent(cmdSetup + strmName + strmIn + fPath + 
       }
     }
   );
-  selectNo();
-}
-
-function selectNo() {
-
-  document.getElementById("idModal").style.display="none";
   addrLastByte--;
-
 }
 
 function fashionExchange() {
-
 var tmpValue = classFiles.value;
-
   classFiles.value = classTasks.value;
   classTasks.value = tmpValue;
-
 }
 
 function selectFiles() {
-
   if ( classDivF.value.indexOf("w3-hide") != -1 ) {
     clearInterval( pollVlm );
     classDivT.value = classDivT.value + " w3-hide";
     classDivF.value = classDivF.value.replace(" w3-hide", "");
     fashionExchange();
   }
-
 }
 
 function selectTasks() {
-
   if ( classDivT.value.indexOf("w3-hide") != -1 ) {
     taskList();
     pollVlm = setInterval( taskList, 5000 );
@@ -182,18 +177,16 @@ function selectTasks() {
     classDivT.value = classDivT.value.replace(" w3-hide", "");
     fashionExchange();
   }
-
 }
 
 function taskList() {
-
 var brList;
-
   w3Http( vlmStatus , function () {
       if ( this.readyState == 4 && this.status == 200 ) {
         xmlDoc = this.responseXML;
         buildTaskList();
         w3DisplayData("tblTasks", tasksObj);
+        w3DisplayData("ulTasks", tasksObj);
       } else  if ( this.readyState == 4 && this.status != 200 ) {
         vlcFail( this );
       }
@@ -214,19 +207,55 @@ var brList;
       }
     }
   );
+}
 
+function filterApp(inPut) {
+var recOrds = document.getElementById("ulTasks").getElementsByTagName("li");
+var arrLen = recOrds.length;
+var whatFind = inPut.value.toLowerCase();
+var l = 0;
+  document.getElementById("ulTasks").style.display = "";
+  if ( whatFind.length > 0 ) {
+    for (l; l<arrLen; l++) {
+      if ( recOrds[l].innerHTML.toLowerCase().indexOf(whatFind) > -1 ) {
+        recOrds[l].style.display = "";
+      } else {
+        recOrds[l].style.display = "none";
+      }
+    }
+  } else {
+    for (l; l<arrLen; l++) {
+      recOrds[l].style.display = "none";
+    }
+  }
+}
+
+function flushToInp(curIl) {
+  document.getElementById("idInp").value = curIl.getElementsByTagName("b")[0].innerHTML;
+  document.getElementById("ulTasks").style.display = "none";
+}
+
+function selectYes() {
+var nameVal = document.getElementById("idInp").value;
+  if ( nameVal === "" ) {
+    tryStream2("Test");
+  } else {
+    tryStream2(nameVal);
+  }
+  document.getElementById("idTaskName").style.display="none";
+}
+
+function selectNo() {
+  document.getElementById("idTaskName").style.display="none";
 }
 
 function closeFList() {
-
   document.getElementById("idSec").style.display = "none";
   document.getElementById("idMain").style.display = "block";
-
+  document.getElementById("idInp").value = "";
 }
 
 function vlcFail( abc ) {
-
   window.alert("VLC can't do it!\nStatus: " + abc.status + " " + abc.statusText);
-
 }
 

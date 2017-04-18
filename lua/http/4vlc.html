@@ -49,10 +49,14 @@
           <div class="w3-btn w3-blue w3-text-white w3-xlarge w3-section w3-round-jumbo" onclick='openFList("","dir")' style="width:70%">Select File</div><br>
         </div>
       </div>
-      <div id="idModal" class="w3-modal w3-animate-opacity">
+      <div id="idTaskName" class="w3-modal">
         <div class="w3-modal-content w3-card-8">
           <div class="w3-container">
-            <p><h2>Task already exist.<br>Add selected file there?</h2></p>
+            <p><h4>Input new Task name for VLM or use any one already exists.</h4></p>
+            <input id="idInp" class="w3-input w3-xlarge w3-padding-0" type="text" placeholder="Test" onkeyup="filterApp(this)">
+            <ul id="ulTasks" class="w3-ul w3-xlarge w3-margin-top">
+              <li w3-repeat="task" class="w3-padding" onclick="flushToInp(this)"><b>{{name}}</b></li>
+            </ul>
             <div class="w3-btn-group w3-xlarge w3-section">
               <button class="w3-btn w3-red w3-wide" onclick="selectNo()" style="width:50%"><b>No</b></button>
               <button class="w3-btn w3-blue w3-wide" onclick="selectYes()" style="width:50%"><b>Yes</b></button>
